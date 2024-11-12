@@ -47,6 +47,14 @@ def update_game_status(game_status, guess):
     game_status['guessed_letters'].add(guess)
 
     if guess in game_state['word']:
+        for i, char in enumerate(game_status['word']):
+            if char == guess:
+                game_status['guessed_word'][i] = guess
+        print("Correct!")
+    else:
+        game_status['attempts'] -= 1
+        print("Incorrect :(")
+
 
 
 
