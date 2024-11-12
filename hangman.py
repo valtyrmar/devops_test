@@ -20,9 +20,23 @@ def start_game(word):
             'attempts': 8
             }
 
+def display_word(guessed_word):
+    return ''.join(guessed_word)
+
+def get_guess():
+    while True:
+        guess = input("Guess a letter: ").lower()
+        if len(guess) == 1 and guess.isalpha():
+            return guess
+        else:
+            print("Invalid input, please enter only one letter.")
+
 #play the game
 def play_game():
     word = select_random_word()
     game = start_game(word)
 
     print("let's play hangman!")
+
+
+play_game()
