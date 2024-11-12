@@ -38,5 +38,16 @@ def play_game():
 
     print("let's play hangman!")
 
+#update based on a player's guess
+def update_game_status(game_status, guess):
+    if guess in game_status['guessed_letters']:
+        print(f"The letter '{guess}' has already been guessed.")
+        return
+
+    game_status['guessed_letters'].add(guess)
+
+    if guess in game_state['word']:
+
+
 
 play_game()
