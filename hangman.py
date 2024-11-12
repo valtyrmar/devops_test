@@ -3,7 +3,7 @@ This is a hangman game developed for entertainment purposes :)
 Author: Valtýr Már Michaelsson
 """
 
-import random
+
 import getpass
 
 #select a word for the other player to guess
@@ -59,12 +59,19 @@ def game_lost(game_status):
 #play the game
 def play_game():
     word = select_random_word()
-    game = start_game(word)
+    game_status = start_game(word)
 
     print("let's play hangman!")
 
     while not game_won(game_status) and not game_lost(game_status):
+        print("\nWord:", display_word(game_status['guessed_word']))
+        print("Attempts left:", game_status['attempts'])
         guess = get_guess()
         update_game_status(game_status, guess)
+
+    if game_won(game_status):
+        print("\nCongratulations! You guessed the word:", word)
+    else:
+        print("\nGame over. The word was:", word)
 
 play_game()
