@@ -6,6 +6,15 @@ Author: Valtýr Már Michaelsson
 import random
 import getpass
 
+#select a word for the other player to guess
 def select_random_word():
     word = getpass.getpass("Enter a word: ").lower()
     return word
+
+#start the game
+def start_game(word):
+    return {'word': word,
+            'guessed_word': ['_']*len(word),
+            'guessed_letters': set(),
+            'attempts': 8
+            }
