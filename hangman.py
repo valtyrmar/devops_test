@@ -31,13 +31,6 @@ def get_guess():
         else:
             print("Invalid input, please enter only one letter.")
 
-#play the game
-def play_game():
-    word = select_random_word()
-    game = start_game(word)
-
-    print("let's play hangman!")
-
 #update based on a player's guess
 def update_game_status(game_status, guess):
     if guess in game_status['guessed_letters']:
@@ -46,7 +39,7 @@ def update_game_status(game_status, guess):
 
     game_status['guessed_letters'].add(guess)
 
-    if guess in game_state['word']:
+    if guess in game_status['word']:
         for i, char in enumerate(game_status['word']):
             if char == guess:
                 game_status['guessed_word'][i] = guess
@@ -55,7 +48,23 @@ def update_game_status(game_status, guess):
         game_status['attempts'] -= 1
         print("Incorrect :(")
 
+#check if the game has been won
+def game_won(game_status):
+    return '_' not in game_status['guessed_word']
 
+#check if the game has been lost
+def game_lost(game_status):
+    return game_status['attempts'] <= 0
 
+#play the game
+def play_game():
+    word = select_random_word()
+    game = start_game(word)
+
+    print("let's play hangman!")
+
+    while not game_won(game_status) and not game_lost(game_status):
+        guess = get_guess()
+        update_game_status(game_status, guess)
 
 play_game()
